@@ -5,7 +5,12 @@ using UnityEngine.UI;
 public class GridBuilder : MonoBehaviour
 {
     public Vector2 spacing = new Vector2(8,8);
-    public RectOffset padding = new RectOffset(8,8,8,8);
+    public RectOffset padding;
+    void Awake()
+    {
+    if (padding == null)
+        padding = new RectOffset(8, 8, 8, 8);
+    }
 
     // Applies cellSize (computed) to GridLayoutGroup on target container
     public void ApplyGrid(RectTransform container, int rows, int cols)

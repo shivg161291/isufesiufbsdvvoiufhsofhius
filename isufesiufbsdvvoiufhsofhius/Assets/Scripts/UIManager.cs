@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI comboText;
     public GameObject gameOverPanel;
@@ -14,11 +15,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScore(int score, int combo, int best, int turns, int matches)
     {
-    if (scoreText) scoreText.text = $"Score: {score}";
-    if (comboText) comboText.text = combo > 0 ? $"Combo x{combo}" : "";
-    if (bestScoreText) bestScoreText.text = $"Best: {best}";
-    if (turnsText) turnsText.text = $"Turns: {turns}";
-    if (matchesText) matchesText.text = $"Matches: {matches}";
+        if (scoreText) scoreText.text = $"Score: {score}";
+        if (comboText) comboText.text = combo > 0 ? $"Combo x{combo}" : "";
+        if (bestScoreText) bestScoreText.text = $"Best: {best}";
+        if (turnsText) turnsText.text = $"Turns: {turns}";
+        if (matchesText) matchesText.text = $"Matches: {matches}";
     }
 
     public void ShowGameOver(int score, int best)
@@ -27,4 +28,12 @@ public class UIManager : MonoBehaviour
         if (gameOverScoreText) gameOverScoreText.text = $"Score: {score}";
         if (bestScoreText) bestScoreText.text = $"Best: {best}";
     }
+
+
+    public void OnRestartButton()
+    {
+        gameManager.RestartGame();
+    }
+    
+
 }

@@ -16,6 +16,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     Image image;
     RectTransform rt;
+    GameManager manager;
 
     void Awake()
     {
@@ -23,11 +24,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
         rt = GetComponent<RectTransform>();
     }
 
-    public void Initialize(int id, Sprite face, Sprite back)
+    public void Initialize(int id, Sprite face, Sprite back, GameManager gm)
     {
         Id = id;
         FaceSprite = face;
         BackSprite = back;
+        manager = gm;
         IsMatched = false;
         IsFaceUp = false;
         image.sprite = BackSprite;
@@ -39,6 +41,8 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         if (IsMatched) return;
         if (IsFaceUp) return;
+        // request flip
+        manager.RequestFlip(this);
     }
 
     public void MarkMatched()
@@ -61,6 +65,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     IEnumerator FlipCoroutine(System.Action onComplete)
     {
+        manager?.Audio.PlayFlip();
         float half = FlipDuration / 2f;
         float t = 0f;
         // first half rotate to 90
