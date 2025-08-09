@@ -35,6 +35,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         image.sprite = BackSprite;
         transform.localRotation = Quaternion.identity;
         gameObject.SetActive(true);
+        image.preserveAspect = true;
     }
 
     public void OnPointerClick(PointerEventData eventData)
